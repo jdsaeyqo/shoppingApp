@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShoppingApp</string>
+    <string name="products">쇼핑</string>
+    <string name="profile">프로필</string>
 </resources>

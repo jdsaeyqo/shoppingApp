@@ -7,14 +7,14 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class ShopApplication : Application(){
+class ShoppingApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
 
         startKoin {
             androidLogger(Level.ERROR)
-            androidContext(this@ShopApplication)
+            androidContext(this@ShoppingApplication)
             modules(appModule)
         }
 
