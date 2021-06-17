@@ -3,7 +3,7 @@ package com.example.shoppingapp.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.extensions.loadCenterCrop
+import com.example.shoppingapp.extensions.loadCenterCrop
 import com.example.shoppingapp.data.entity.product.ProductEntity
 import com.example.shoppingapp.databinding.ViewholderProductItemBinding
 

@@ -1,4 +1,4 @@
-package com.example.extensions
+package com.example.shoppingapp.extensions
 
 import android.content.Context
 import android.widget.Toast

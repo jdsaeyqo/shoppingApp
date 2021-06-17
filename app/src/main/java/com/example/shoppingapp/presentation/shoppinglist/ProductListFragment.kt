@@ -4,7 +4,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
-import com.example.extensions.toast
+import com.example.shoppingapp.extensions.toast
 import com.example.shoppingapp.databinding.FragmentProductListBinding
 import com.example.shoppingapp.presentation.BaseFragment
 import com.example.shoppingapp.presentation.adapter.ProductListAdapter

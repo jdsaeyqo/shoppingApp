@@ -1,4 +1,4 @@
-package com.example.extensions
+package com.example.shoppingapp.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
