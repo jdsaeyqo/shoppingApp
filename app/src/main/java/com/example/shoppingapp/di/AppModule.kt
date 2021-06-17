@@ -7,6 +7,7 @@ import com.example.shoppingapp.data.network.provideProductRetrofit
 import com.example.shoppingapp.data.repository.DefaultProductRepository
 import com.example.shoppingapp.data.repository.ProductRepository
 import com.example.shoppingapp.domain.GetProductItemUseCase
+import com.example.shoppingapp.domain.GetProductListUseCase
 import com.example.shoppingapp.presentation.main.MainViewModel
 import com.example.shoppingapp.presentation.profile.ProfileViewModel
 import com.example.shoppingapp.presentation.shoppinglist.ProductListViewModel
@@ -22,7 +23,7 @@ internal val appModule = module {
 
     //ViewModel
     viewModel{ MainViewModel() }
-    viewModel { ProductListViewModel() }
+    viewModel { ProductListViewModel(get()) }
     viewModel { ProfileViewModel() }
 
     //Repositories
@@ -30,6 +31,7 @@ internal val appModule = module {
 
     //UseCases
     factory { GetProductItemUseCase(get()) }
+    factory { GetProductListUseCase(get()) }
 
     single { provideGsonConverterFactory() }
 
