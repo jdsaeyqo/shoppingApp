@@ -1,5 +1,6 @@
 package com.example.shoppingapp.data.repository
 
+import com.example.shoppingapp.data.db.dao.ProductDao
 import com.example.shoppingapp.data.entity.product.ProductEntity
 import com.example.shoppingapp.data.network.ProductApiService
 import kotlinx.coroutines.CoroutineDispatcher
@@ -7,7 +8,8 @@ import kotlinx.coroutines.withContext
 
 class DefaultProductRepository(
     private val productApi: ProductApiService,
-    private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher,
+    private val productDao : ProductDao
 ) : ProductRepository {
     override suspend fun getProductList(): List<ProductEntity> = withContext(ioDispatcher){
         val response = productApi.getProducts()
@@ -23,7 +25,7 @@ class DefaultProductRepository(
     }
 
     override suspend fun insertProductItem(ProductItem: ProductEntity): Long = withContext(ioDispatcher){
-        TODO("Not yet implemented")
+        productDao.insert(ProductItem)
     }
 
     override suspend fun insertProductList(ProductList: List<ProductEntity>) = withContext(ioDispatcher){
@@ -35,7 +37,12 @@ class DefaultProductRepository(
     }
 
     override suspend fun getProductItem(itemId: Long): ProductEntity? = withContext(ioDispatcher){
-        TODO("Not yet implemented")
+        val response = productApi.getProduct(itemId)
+        return@withContext if (response.isSuccessful) {
+            response.body()?.toEntity()
+        } else {
+            null
+        }
     }
 
     override suspend fun deleteAll() = withContext(ioDispatcher){

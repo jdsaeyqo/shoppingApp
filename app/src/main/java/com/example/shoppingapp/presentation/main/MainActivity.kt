@@ -62,6 +62,14 @@ internal class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>(),
 
     }
 
-    override fun observeData() {
+    override fun observeData() = viewModel.mainStateLiveData.observe(this) {
+        when(it){
+            is MainState.RefreshOrderList -> {
+                binding.bottomNav.selectedItemId = R.id.menu_profile
+                val fragment = supportFragmentManager.findFragmentByTag(ProfileFragment.TAG)
+
+                //Todo fragment BaseFragment타입 캐스팅 fetchData()
+            }
+        }
     }
 }
