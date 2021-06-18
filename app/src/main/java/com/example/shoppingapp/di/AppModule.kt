@@ -1,5 +1,7 @@
 package com.example.shoppingapp.di
 
+import com.example.shoppingapp.data.db.provideDB
+import com.example.shoppingapp.data.db.provideToDoDao
 import com.example.shoppingapp.data.network.buildOkHttpClient
 import com.example.shoppingapp.data.network.provideGsonConverterFactory
 import com.example.shoppingapp.data.network.provideProductApiService
@@ -14,6 +16,7 @@ import com.example.shoppingapp.presentation.main.MainViewModel
 import com.example.shoppingapp.presentation.profile.ProfileViewModel
 import com.example.shoppingapp.presentation.shoppinglist.ProductListViewModel
 import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -31,7 +34,7 @@ internal val appModule = module {
     viewModel { (productId : Long) -> ProductDetailViewModel(productId,get(),get()) }
 
     //Repositories
-    single<ProductRepository> { DefaultProductRepository(get(), get()) }
+    single<ProductRepository> { DefaultProductRepository(get(), get(),get()) }
 
     //UseCases
     factory { GetProductItemUseCase(get()) }
@@ -46,4 +49,9 @@ internal val appModule = module {
     single { provideProductRetrofit(get(), get()) }
 
     single { provideProductApiService(get()) }
+
+    //Database
+    single { provideDB(androidApplication()) }
+    single { provideToDoDao(get())}
+
 }
