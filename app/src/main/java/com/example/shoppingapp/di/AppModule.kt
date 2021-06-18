@@ -8,6 +8,8 @@ import com.example.shoppingapp.data.repository.DefaultProductRepository
 import com.example.shoppingapp.data.repository.ProductRepository
 import com.example.shoppingapp.domain.GetProductItemUseCase
 import com.example.shoppingapp.domain.GetProductListUseCase
+import com.example.shoppingapp.domain.OrderProductItemUseCase
+import com.example.shoppingapp.presentation.detail.ProductDetailViewModel
 import com.example.shoppingapp.presentation.main.MainViewModel
 import com.example.shoppingapp.presentation.profile.ProfileViewModel
 import com.example.shoppingapp.presentation.shoppinglist.ProductListViewModel
@@ -20,11 +22,13 @@ internal val appModule = module {
 
     // Coroutines Dispatcher
     single { Dispatchers.IO }
+    single { Dispatchers.Main }
 
     //ViewModel
     viewModel{ MainViewModel() }
     viewModel { ProductListViewModel(get()) }
     viewModel { ProfileViewModel() }
+    viewModel { (productId : Long) -> ProductDetailViewModel(productId,get(),get()) }
 
     //Repositories
     single<ProductRepository> { DefaultProductRepository(get(), get()) }
@@ -32,7 +36,9 @@ internal val appModule = module {
     //UseCases
     factory { GetProductItemUseCase(get()) }
     factory { GetProductListUseCase(get()) }
+    factory { OrderProductItemUseCase(get()) }
 
+    //Repository
     single { provideGsonConverterFactory() }
 
     single { buildOkHttpClient() }
